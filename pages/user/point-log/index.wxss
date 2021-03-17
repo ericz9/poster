@@ -1,0 +1,8 @@
+.container{padding:0;padding-bottom:64px}
+.container .van-hairline--top-bottom:after{border-width:0}
+.list .van-cell:after{left:0}
+.list .van-cell .title{font-size:14px}
+.list .van-cell .title .desc{font-size:12px;color:#969799}
+.list .van-cell .label{font-size:12px}
+.list .incr{font-size:18px;font-weight:500;color:#67c23a}
+.list .decr{font-size:18px;font-weight:500;color:#f56c6c}

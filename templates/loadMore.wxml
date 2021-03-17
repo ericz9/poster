@@ -1,0 +1,14 @@
+<template name="loadMore">
+  <view class="load-more">
+    <van-loading custom-class="color" size="20px" wx:if="{{pager.loading === 'loading'}}" />
+    <view class="load-more-failed color" wx:elif="{{pager.loading === 'fail'}}">
+      <van-icon class="iconfont icon-redo" />
+      <view bind:tap="loadMore">点击重新加载</view>
+    </view>
+    <block wx:else>
+      <view class="load-more-done" wx:if="{{!pager.hasMore}}">
+        <van-divider contentPosition="center">我是有底线的</van-divider>
+      </view>
+    </block>
+  </view>
+</template>

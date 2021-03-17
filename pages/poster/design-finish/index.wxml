@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="header">
+    <block wx:if="{{saveImage}}">
+      <van-icon class="iconfont icon-check-circle-fill"></van-icon>
+      <text>设计已保存到手机相册</text>
+    </block>
+  </view>
+  <view class="body">
+    <view class="wrapper">
+      <van-image fit="heightFix" src="{{imageUrl}}" bind:click="previewImage" use-loading-slot>
+        <van-loading slot="loading" type="spinner" size="20" vertical />
+      </van-image>
+    </view>
+    <view class="tips">
+      <van-divider contentPosition="center">
+        点击图片，长按可分享给好友
+      </van-divider>
+    </view>
+    <view class="op" wx:if="{{isShare}}">
+      <van-button plain round type="primary" bind:click="onClickGotoHome">我也要设计</van-button>
+      <van-button round type="primary" bind:click="onClickGotoDesign">使用此设计</van-button>
+    </view>
+    <view class="op" wx:else>
+      <van-button plain round type="primary" bind:click="onClickGotoHome">再创建一个</van-button>
+      <van-button round type="primary" open-type="share">分享</van-button>
+    </view>
+  </view>
+</view>

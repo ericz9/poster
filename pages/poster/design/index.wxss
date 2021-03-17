@@ -1,0 +1,50 @@
+page{background-color:#f3f4f9}
+.container{padding:5px 40px !important}
+.wrapper{position:relative;margin:0 auto;height:100%;padding-bottom:70px}
+.wrapper .page{width:750px}
+.com{position:relative}
+.com .editable{border:2px dashed #969799}
+.com .editable.active{border:2px dashed #ee0a24}
+.com .img{width:100%;height:100%}
+.com-image{height:100%}
+.com-image .img-warpper{height:100%}
+.com-line,.com-circle,.com-rectangle{width:100%;height:100%}
+.van-goods-action .iconfont{font-size:20px;margin-bottom:4px}
+.popup .op{display:flex;justify-content:space-between;padding:10px 15px;font-size:16px;border-bottom:1px solid #eee}
+.popup .op .cancel{color:#969799}
+.popup-change-color .popup{display:flex;padding:8px}
+.popup-change-color .popup .color-column{display:flex;flex-direction:column}
+.popup-change-color .popup .color-box{margin:3px;width:34px;height:34px;border-radius:5px}
+.popup-change-size{height:100px}
+.popup-change-size .van-slider{margin:20px 15px 0 15px}
+.popup-change-image{width:70%;height:100%}
+.popup-change-image .van-hairline--top-bottom:after{border-width:0}
+.popup-change-image .popup{height:100%;display:flex;flex-direction:column;justify-content:space-between;background-color:#f3f4f9}
+.popup-change-image .van-tabs__wrap{background-color:#fff}
+.popup-change-image .upload .body{background-color:#fff;height:calc(100vh - 80px)}
+.popup-change-image .upload .body.qrcode{height:calc(100vh - 50px)}
+.popup-change-image .upload .body.qrcode .item .default{position:absolute;top:5px;right:10px;padding:3px;border-radius:20px;background:rgba(37,38,45,.7);color:#fff;font-size:12px;width:40px;text-align:center}
+.popup-change-image .upload .body .item{position:relative}
+.popup-change-image .upload .body .item .iconfont{position:absolute;top:5px;right:10px;color:#fff;font-size:25px}
+.popup-change-image .upload .footer{display:flex;justify-content:space-between;background-color:#fff;padding:5px 15px;box-shadow:0 4px 16px 0 rgba(0,0,0,.1)}
+.popup-change-image .upload .footer .btn{display:flex;justify-content:center;align-items:center;color:#fff;font-size:14px;font-weight:500;border-radius:30px;height:40px;width:100%}
+.popup-change-image .upload .footer .btn.btn-add{width:50%}
+.popup-change-image .upload .footer .btn.btn-edit{border:1px solid #ebedf0;width:40%;height:38px}
+.popup-change-image .upload .footer .btn.btn-delete{width:45%}
+.popup-change-image .upload .footer .btn.btn-quit{border:1px solid #ebedf0;width:45%;height:38px}
+.popup-change-image .upload .footer .iconfont{margin-right:10px;font-size:24px}
+.popup-change-image .store .header{background-color:#fff;margin-bottom:10px}
+.popup-change-image .store .header .btn{display:flex;justify-content:space-between;padding:10px}
+.popup-change-image .store .body{background-color:#fff;height:calc(100vh - 100px)}
+.popup-change-image .store .footer{background-color:#fff;height:10px}
+.popup-change-image .body .images{padding:10px;display:flex;justify-content:space-between;flex-wrap:wrap}
+.popup-change-image .body .images .item{flex-basis:calc(50% - 10px);height:calc((35vw - 20px) * 0.75);margin:5px 0;padding:0 5px}
+.popup-change-image .body .images .van-image{width:100%;height:100%}
+.popup-point-less{width:70%}
+.popup-point-less.van-popup--center.van-popup--round{border-radius:10px}
+.popup-point-less .popup{padding:20px 30px;text-align:center}
+.popup-point-less .popup image{margin-bottom:20px;width:100px;height:100px}
+.popup-point-less .popup .title{font-size:20px;font-weight:500;margin-bottom:20px}
+.popup-point-less .popup .point{font-size:20px;color:#ff9f7c;margin-bottom:20px}
+.popup-point-less .popup .point .text{font-size:14px;margin:0 2px}
+.popup-point-less .popup .van-button{width:200px;background-color:#ff9f7c !important;border-color:#ff9f7c !important}

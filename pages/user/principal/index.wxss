@@ -1,0 +1,10 @@
+.van-notice-bar--wrapable{padding:8px 31px !important}
+.van-notice-bar .iconfont{font-size:30px;margin-right:15px}
+.container .logo{align-items:center}
+.container .logo .van-cell__title{color:#646566}
+.container .logo .content{display:flex;justify-content:space-between;align-items:center}
+.container .logo .content image{width:100px;height:100px}
+.container .logo .content .right{display:flex;align-items:center}
+.container .logo .content .iconfont{color:#969799;margin-left:4px}
+.footer{margin-top:20px;text-align:center}
+.footer button{color:#fff}

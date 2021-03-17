@@ -1,0 +1,35 @@
+<import src="/templates/failed.wxml" />
+<import src="/templates/loadMore.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <van-sticky>
+    <view class="header">
+      <view class="nav">
+        <view 
+          class="{{item.current ? 'tag active bgcolor bdcolor' : 'tag'}}"
+          wx:for="{{attribute.records}}"
+          id="{{item.id}}"
+          bind:tap="onClickTag">
+          {{item.value}}
+        </view>
+      </view>
+    </view>
+  </van-sticky>
+  <view class="wrapper">
+    <view class="poster">
+      <view class='left'>
+        <view wx:for="{{left.posters}}" id="{{item.id}}" bind:tap="onClickPoster">
+          <van-image src="{{item.imageUrl}}" height='{{item.imageHeight}}rpx' lazy-load />
+        </view>
+      </view>
+      <view class='right'>
+        <view wx:for="{{right.posters}}" id="{{item.id}}" bind:tap="onClickPoster">
+          <van-image src="{{item.imageUrl}}" height='{{item.imageHeight}}rpx' lazy-load />
+        </view>
+      </view>
+    </view>
+    <template is="loadMore" data="{{...{pager: pager} }}"/>
+  </view>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>

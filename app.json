@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/works/index",
+    "pages/user/index",
+    "pages/poster/design/index",
+    "pages/poster/design-finish/index",
+    "pages/poster/list/index",
+    "pages/poster/search/index",
+    "pages/user/qrcode/index",
+    "pages/user/principal/index",
+    "pages/user/point/index",
+    "pages/user/point-log/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "老板海报",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ee1e0b",
+    "backgroundColor": "#fbfbfb",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "/assets/images/wap-home.png",
+        "selectedIconPath": "/assets/images/wap-home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/works/index",
+        "iconPath": "/assets/images/works.png",
+        "selectedIconPath": "/assets/images/works-active.png",
+        "text": "作品"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "/assets/images/user-o.png",
+        "selectedIconPath": "/assets/images/user-o-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

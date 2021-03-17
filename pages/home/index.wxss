@@ -1,0 +1,24 @@
+page{background-color:#f3f4f9}
+.header{background-color:#fff;padding:10px 15px}
+.header .search{background-color:#f7f8fa;color:#ccc;font-size:14px;min-height:24px;padding:5px;border-radius:3px;display:flex;align-items:center;margin-bottom:10px}
+.header .search .van-icon{margin-right:5px}
+.header .ads{height:175px}
+.header .ads .swiper{height:175px}
+.header .ads .img{width:100%;height:100%}
+.header .nav{background-color:#fff;margin:10px 0 5px 0;color:#323233}
+.header .nav .item{display:inline-block;width:20%;text-align:center}
+.header .nav .item .img{width:30px;height:30px;margin-bottom:3px}
+.header .nav .item .name{font-size:12px}
+.wrapper{margin-top:20px;padding:0}
+.section{margin-bottom:10px;padding:15px 0;background:#fff}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding:0 15px}
+.section-header .title{font-size:18px;font-weight:600}
+.section-header .more{display:flex;align-items:center;font-size:12px;color:#969799}
+.section-category{display:flex;font-size:13px;color:#969799;margin-bottom:10px;padding:0 15px}
+.section-category .tag{padding:3px;border-radius:20px;border:1px solid #969799;margin-right:5px;width:60px;text-align:center}
+.section-category .tag.active{color:#fff}
+.section-list{display:flex;justify-content:space-between;flex-wrap:wrap;padding:0 10px}
+.section-list:after{content:"";width:calc(33.33%)}
+.section-list .item{flex-basis:calc(33.33% - 10px);padding:0 5px;margin-bottom:5px}
+.section-list .img{width:100%;border-radius:8px;box-shadow:0px 2px 4px 0px rgba(0,28,88,0.14)}
+.section-bottom{display:flex;align-items:center;font-size:12px;color:#969799;justify-content:center;padding:0 15px}

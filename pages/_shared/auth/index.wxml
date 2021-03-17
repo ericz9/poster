@@ -1,0 +1,12 @@
+<view class="main">
+  <van-row class="logo">
+    <image mode="aspectFit" src="{{logoUrl}}"></image>
+  </van-row>
+  <van-row class="auth">
+    <view class="op" wx:if="{{canIUse}}">
+      <view class="tips">请完成微信授权以继续使用</view>
+      <van-button type="primary" size="large" block open-type="getUserInfo" bind:getuserinfo="bindGetUserInfo">微信授权登录</van-button>
+    </view>
+    <view class="upgrade" wx:else>请升级微信版本</view>
+  </van-row>
+</view>

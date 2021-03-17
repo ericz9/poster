@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "常用二维码",
+  "usingComponents": {
+    "simple-crop":"/components/simple-crop/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-image": "@vant/weapp/image/index"
+  }
+}

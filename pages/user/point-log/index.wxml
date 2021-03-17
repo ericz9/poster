@@ -1,0 +1,29 @@
+<import src="/templates/failed.wxml" />
+<import src="/templates/loadMore.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <view class="container" wx:if="{{pointLogs && pointLogs.length > 0}}">
+    <view class="list">
+      <van-cell-group>
+        <van-cell use-label-slot="{{true}}" wx:for="{{pointLogs}}">
+          <view slot="title" class="title">
+            {{item.settingName}}
+            <view class="desc" wx:if="{{item.describe.length > 0}}">{{item.describe}}</view>
+          </view>
+          <view slot="right-icon">
+            <view class="incr" wx:if="{{item.type === 1}}">+{{item.pointValue}}</view>
+            <view class="decr" wx:else>-{{item.pointValue}}</view>
+          </view>
+          <view slot="label" class="label">{{item.createTime}}</view>
+        </van-cell>
+      </van-cell-group>
+      <template is="loadMore" data="{{...{pager: pager} }}"/>
+    </view>
+  </view>
+  <view class="failed" wx:else>
+    <van-icon name="warning" custom-class="warning" />
+    <view class="tips">您还没有积分哦~</view>
+  </view>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>

@@ -1,0 +1,12 @@
+.container{padding:0 0 75px 0 !important}
+.body{padding:0 10px}
+.body .images{display:flex;justify-content:space-between;flex-wrap:wrap}
+.body .images .item{flex-basis:calc(50% - 20px);margin:10px 0;padding:0 10px}
+.body .images .van-image{width:100%;height:calc(50vw - 30px)}
+.body .images .op{display:flex;justify-content:space-between;color:#969799;font-size:12px;height:21px}
+.body .images .op .default,.body .images .op .delete{display:flex;align-items:center}
+.body .images .op .default .iconfont,.body .images .op .delete .iconfont{margin-right:2px}
+.body .images .op .default .tag{border-radius:10px;width:40px;text-align:center;color:#fff;padding:2px 1px}
+.footer{position:fixed;bottom:0;width:100%;padding:10px 0;font-size:16px;color:#fff;height:30px;line-height:30px}
+.footer .op{display:flex;justify-content:center;align-items:center}
+.footer .op .iconfont{margin-right:5px;font-size:24px}

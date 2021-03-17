@@ -1,0 +1,37 @@
+<view class="header bgcolor">
+  <view class="avatar">
+    <image src="{{user.headImg}}" />
+  </view>
+  <view class="name" wx:if="{{user.login === 1}}">{{user.nickName}}</view>
+  <view class="login" bind:tap="onClickLogin" wx:else>
+    <text>立即登录</text>
+    <van-icon class="iconfont icon-right" />
+  </view>
+</view>
+<view class="container">
+  <van-cell title="我的积分" value="可用来设计更多海报哦" size="large" class="{{user.login === 1 ? '' : 'invalid'}}" url="{{user.login === 1 ? '/pages/user/point/index' : ''}}">
+    <van-icon slot="icon" class="iconfont icon-star"></van-icon>
+    <van-icon slot="right-icon" class="iconfont icon-right"></van-icon>
+  </van-cell>
+  <van-cell title="常用二维码" size="large" class="{{user.login === 1 ? '' : 'invalid'}}" url="{{user.login === 1 ? '/pages/user/qrcode/index' : ''}}">
+    <van-icon slot="icon" class="iconfont icon-qrcode"></van-icon>
+    <van-icon slot="right-icon" class="iconfont icon-right"></van-icon>
+  </van-cell>
+  <van-cell title="门店基础信息" size="large" class="{{user.login === 1 ? '' : 'invalid'}}" url="{{user.login === 1 ? '/pages/user/principal/index' : ''}}">
+    <van-icon slot="icon" class="iconfont icon-shop"></van-icon>
+    <van-icon slot="right-icon" class="iconfont icon-right"></van-icon>
+  </van-cell>
+  <van-cell title="联系客服" size="large" bind:click="onClickContactCustom">
+    <van-icon slot="icon" class="iconfont icon-customerservice-fill"></van-icon>
+    <van-icon slot="right-icon" class="iconfont icon-right"></van-icon>
+  </van-cell>
+</view>
+
+<!-- 文字 -->
+<van-popup show="{{showContactCustomDialog}}" position="center" round custom-class="popup-custom" bind:close="onCloseContactCustomDialog">
+  <view class="popup">
+    <view class="title">您有任何问题，</view>
+    <view class="subtitle">欢迎随时与我们联系</view>
+    <view class="btn bgcolor" bind:tap="onClickClipboardWx">复制微信号</view>
+  </view>
+</van-popup>

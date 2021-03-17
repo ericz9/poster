@@ -1,0 +1,27 @@
+page{background-color:#f3f4f9}
+.header{display:flex;flex-direction:column;justify-content:center;align-items:center;height:200px;width:100%;color:#fff}
+.header .avatar{margin-bottom:10px}
+.header .avatar image{width:70px;height:70px;border-radius:5px}
+.header .login{display:flex;align-items:center}
+.container{padding:0 !important;margin-top:20px;background-color:#fff;min-height:calc(100vh - 220px)}
+.container .van-cell{padding-top:20px;padding-bottom:20px}
+.container .van-cell__title{margin-left:10px}
+.container .van-cell--large .van-cell__value{font-size:12px;color:#f683a2}
+.container .invalid .van-cell,
+.container .invalid .van-cell--large .van-cell__value,
+.container .invalid .iconfont.icon-right,
+.container .invalid .iconfont.icon-star,
+.container .invalid .iconfont.icon-qrcode,
+.container .invalid .iconfont.icon-shop{
+  color:#7d7e80
+}
+.container .iconfont{font-size:20px}
+.container .iconfont.icon-right{font-size:16px;color:#969799}
+.container .iconfont.icon-star{color:#f683a2}
+.container .iconfont.icon-qrcode{color:#2c83ff}
+.container .iconfont.icon-shop{color:#faa651}
+.container .iconfont.icon-customerservice-fill{color:#39b54a}
+.popup-custom .popup{padding:30px;text-align:center;color:#969799}
+.popup-custom .popup .title{font-size:20px;margin-bottom:10px}
+.popup-custom .popup .subtitle{font-size:16px;margin-bottom:30px}
+.popup-custom .popup .btn{width:200px;color:#fff;font-size:14px;border-radius:30px;padding:10px 0}

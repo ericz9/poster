@@ -1,0 +1,18 @@
+{
+  "usingComponents": {
+    "painter":"/components/painter/painter",
+    "simple-crop":"/components/simple-crop/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-slider": "@vant/weapp/slider/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index"
+  }
+}

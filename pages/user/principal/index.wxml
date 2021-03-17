@@ -1,0 +1,36 @@
+<import src="/templates/failed.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <van-notice-bar wrapable scrollable="{{false}}" text="海报设计时，会自动拉取门店信息填入合适区域，以提高制作效率。">
+    <van-icon slot="left-icon" class="iconfont icon-bulb"></van-icon>
+  </van-notice-bar>
+  <view class="container">
+    <form bindsubmit="formSubmit">
+      <van-cell custom-class="logo" title="LOGO" title-width="90px" bind:tap="onClickUploadImage">
+        <view class="content">
+          <image src="{{form.logoSQShowUrl}}" mode="aspectFit" />
+          <view class="right">
+            <text>修改</text>
+            <van-icon class="iconfont icon-right"></van-icon>
+          </view>
+        </view>
+      </van-cell>
+      <van-field name="principalName" value="{{form.principalName}}" label="门店名称" maxlength="50" placeholder="请填写门店名称" bind:blur="onSetPrincipalName" />
+      <van-field name="contactWay" value="{{form.contactWay}}" label="联系方式" maxlength="50" placeholder="请填写联系方式" bind:blur="onSetContactWay" />
+      <van-field name="address" value="{{form.address}}" label="地址" maxlength="100" placeholder="请填写门店地址" bind:blur="onSetAddress" />
+      <view class="footer">
+        <button class="bgcolor" disabled="{{form.disabledSubmit}}" form-type="submit">保存</button>
+      </view>
+    </form>
+    <simple-crop 
+      wx:if="{{imageCrop.visible}}" 
+      size="{{imageCrop.size}}" 
+      src="{{imageCrop.url}}" 
+      cropSizePercent="{{imageCrop.cropSizePercent}}" 
+      borderColor="{{imageCrop.borderColor}}" 
+      bindcropClose="onCloseCropCallback"
+      bindcropCrop="onCropCallback" />
+  </view>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>

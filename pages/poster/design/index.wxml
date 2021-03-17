@@ -1,0 +1,306 @@
+<import src="/templates/failed.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <view class="container" style="height:{{page.scaleHeight}}px">
+    <view class="wrapper">
+      <view 
+        class="page" 
+        style="transform:scale({{page.zoom / 90}});transform-origin:left top;height:{{poster.height}}px"
+        bind:tap="onExitEdit">
+        <view 
+          class="com" 
+          style="width:{{com.record.width}}px;height:{{com.record.height}}px;min-width:{{com.record.minWidth}}px;min-height:{{com.record.minHeight}}px;position:absolute;left:{{com.left}}px;top:{{com.top}}px"
+          wx:for="{{poster.widgets}}" 
+          wx:for-item="com">
+          <view class="com-image" wx:if="{{com.type === 'w-image'}}">
+            <image class="img" src="{{com.imgUrl}}" mode="scaleToFill" wx:if="{{index === 0}}" />
+            <block wx:else>
+              <view 
+                class="{{currentComponent.uuid === com.uuid ? 'img-warpper editable active bdcolor' : 'img-warpper editable'}}"
+                wx:if="{{fn.canEdit(com.setting)}}"
+                id="{{com.uuid}}"
+                catch:tap="onClickComponent">
+                <image 
+                  class="img" 
+                  style="border-top-left-radius:{{com.radiusTopLeft}}px;border-top-right-radius:{{com.radiusTopRight}}px;border-bottom-right-radius:{{com.radiusBottomRight}}px;border-bottom-left-radius:{{com.radiusBottomLeft}}px;opacity:{{com.opacity}}"
+                  src="{{com.imgUrl}}" 
+                  mode="scaleToFill" />
+              </view>
+              <view class="img-warpper" wx:else>
+                <image 
+                  class="img" 
+                  style="border-top-left-radius:{{com.radiusTopLeft}}px;border-top-right-radius:{{com.radiusTopRight}}px;border-bottom-right-radius:{{com.radiusBottomRight}}px;border-bottom-left-radius:{{com.radiusBottomLeft}}px;opacity:{{com.opacity}}"
+                  src="{{com.imgUrl}}" 
+                  mode="scaleToFill" />
+              </view>
+            </block>
+          </view>
+          <view class="com-text" wx:elif="{{com.type === 'w-text'}}">
+            <view style="line-height:{{com.lineHeight * com.fontSize}}px;letter-spacing:{{com.letterSpacing}}px;font-family:{{com.fontClass.value}};font-size:{{com.fontSize}}px;font-weight:{{com.fontWeight}};font-style:{{com.fontStyle}};text-decoration:{{com.textDecoration}};color:{{com.textColor}};text-align:{{com.textAlign}};opacity:{{com.opacity}};background-color:{{com.backgroundColor}}">
+              <view 
+                class="{{currentComponent.uuid === com.uuid ? 'editable active bdcolor' : 'editable'}}"
+                wx:if="{{fn.canEdit(com.setting)}}"
+                id="{{com.uuid}}"
+                catch:tap="onClickComponent">
+                <text decode="{{true}}" space="nbsp">{{com.text}}</text>
+              </view>
+              <view wx:else>
+                <text decode="{{true}}" space="nbsp">{{com.text}}</text>
+              </view>
+            </view>
+          </view>
+          <view 
+            class="com-line" 
+            style="background-color:{{com.backgroundColor}};opacity:1"
+            wx:elif="{{com.type === 'w-line'}}">
+          </view>
+          <view 
+            class="com-circle" 
+            style="border:{{com.size}}px solid {{com.color}};background-color:{{com.backgroundColor}};border-radius:50%;opacity:1"
+            wx:elif="{{com.type === 'w-circle'}}">
+          </view>
+          <view 
+            class="com-rectangle" 
+            style="border-top-left-radius:{{com.radiusTopLeft}}px;border-top-right-radius:{{com.radiusTopRight}}px;border-bottom-right-radius:{{com.radiusBottomRight}}px;border-bottom-left-radius:{{com.radiusBottomLeft}}px;border:{{com.size}}px solid {{com.color}};background-color:{{com.backgroundColor}};opacity:1"
+            wx:elif="{{com.type === 'w-rectangle'}}">
+          </view>
+        </view>
+      </view>
+    </view>
+    <van-goods-action wx:if="{{currentComponent && currentComponent.uuid}}">
+      <van-goods-action-icon text="撤销" disabled="{{historyIndex < 1 || history.length <= 1}}" bind:click="onClickUndo"><van-icon slot="icon" class="iconfont icon-undo"></van-icon></van-goods-action-icon>
+      <van-goods-action-icon text="恢复" disabled="{{historyIndex === history.length - 1}}" bind:click="onClickRedo"><van-icon slot="icon" class="iconfont icon-redo"></van-icon></van-goods-action-icon>
+      <block wx:if="{{currentComponent.type === 'w-text'}}">
+        <van-goods-action-icon text="文字" bind:click="onClickChangeText"><van-icon slot="icon" class="iconfont icon-file-text"></van-icon></van-goods-action-icon>
+        <van-goods-action-icon text="颜色" bind:click="onClickChangeColor"><van-icon slot="icon" class="iconfont icon-bg-colors"></van-icon></van-goods-action-icon>
+        <van-goods-action-icon text="字号" bind:click="onClickChangeSize"><van-icon slot="icon" class="iconfont icon-font-size"></van-icon></van-goods-action-icon>
+      </block>
+      <block wx:if="{{currentComponent.type === 'w-image'}}">
+        <van-goods-action-icon text="换图" bind:click="onClickChangeLogo" wx:if="{{currentComponent.code === 'logo'}}"><van-icon slot="icon" class="iconfont icon-image"></van-icon></van-goods-action-icon>
+        <van-goods-action-icon text="换图" bind:click="onClickChangeQrcode" wx:elif="{{currentComponent.code === 'qrcode'}}"><van-icon slot="icon" class="iconfont icon-image"></van-icon></van-goods-action-icon>
+        <van-goods-action-icon text="换图" bind:click="onClickChangeImage" wx:else><van-icon slot="icon" class="iconfont icon-image"></van-icon></van-goods-action-icon>
+      </block>
+      <van-goods-action-icon text="删除" bind:click="onClickDelete"><van-icon slot="icon" class="iconfont icon-delete"></van-icon></van-goods-action-icon>
+      <van-goods-action-button text="生成海报" bind:click="onClickSave" />
+    </van-goods-action>
+    <van-goods-action wx:else>
+      <van-goods-action-icon text="撤销" disabled="{{historyIndex < 1 || history.length <= 1}}" bind:click="onClickUndo"><van-icon slot="icon" class="iconfont icon-undo"></van-icon></van-goods-action-icon>
+      <van-goods-action-icon text="恢复" disabled="{{historyIndex === history.length - 1}}" bind:click="onClickRedo"><van-icon slot="icon" class="iconfont icon-redo"></van-icon></van-goods-action-icon>
+      <!-- <van-goods-action-button text="暂存" type="warning" /> -->
+      <van-goods-action-button text="生成海报" bind:click="onClickSave" />
+    </van-goods-action>
+  </view>
+  <painter style="position:fixed;top:-9999rpx" widthPixels="750" palette="{{paletteJson}}" bind:imgOK="onImgOK" />
+  <simple-crop 
+    wx:if="{{imageCrop.visible}}" 
+    size="{{imageCrop.size}}" 
+    src="{{imageCrop.url}}" 
+    cropSizePercent="{{imageCrop.cropSizePercent}}" 
+    borderColor="{{imageCrop.borderColor}}" 
+    bindcropClose="onCloseCropCallback"
+    bindcropCrop="onCropCallback" />
+
+  <!-- 文字 -->
+  <van-popup wx:if="{{showChangeTextDialog}}" show="{{showChangeTextDialog}}" position="bottom" round custom-class="popup-change-text" close-on-click-overlay="{{false}}">
+    <view class="popup">
+      <view class="op">
+        <view class="cancel" bind:tap="onCloseChangeTextDialog">取消</view>
+        <view class="color" bind:tap="onChangeText">确定</view>
+      </view>
+      <van-field
+        type="textarea"
+        value="{{currentComponent.text}}"
+        autosize="{{textSizeCss}}"
+        show-word-limit
+        maxlength="200"
+        bind:change="onSetCurrentText"/>
+    </view>
+  </van-popup>
+  <!-- 颜色 -->
+  <van-popup show="{{showChangeColorDialog}}" position="bottom" round custom-class="popup-change-color" bind:close="onCloseChangeColorDialog">
+    <view class="popup">
+      <view class="color-column" wx:for="{{colors}}" wx:for-item="color">
+        <view 
+          class="color-box" 
+          wx:for="{{color}}" 
+          style="background-color:{{item}}"
+          id="{{item}}"
+          bind:tap="onChangeColor">
+        </view>
+      </view>
+    </view>
+  </van-popup>
+  <!-- 字号 -->
+  <van-popup show="{{showChangeSizeDialog}}" position="bottom" round custom-class="popup-change-size" close-on-click-overlay="{{false}}">
+    <view class="popup">
+      <view class="op">
+        <view class="cancel" bind:tap="onCancelChangeSize">取消</view>
+        <view class="color" bind:tap="onConfirmChangeSize">确定</view>
+      </view>
+      <van-slider value="{{currentComponent.fontSize}}" min="{{12}}" max="{{150}}" bind:change="onChangeSize" />
+    </view>
+  </van-popup>
+  <!-- 常用二维码 -->
+  <van-popup show="{{showChangeQrcodeDialog}}" position="right" custom-class="popup-change-image" catchtouchmove="ture" bind:close="onCloseChangeQrcodeDialog">
+    <view class="popup upload">
+      <scroll-view scroll-y class="body qrcode">
+        <view class="images">
+          <block wx:if="{{opQrcode}}">
+            <view 
+              class="item"
+              wx:for="{{qrcodes}}"
+              id="{{item.id}}"
+              bind:tap="onCheckQrcode">
+              <van-image fit="contain" src="{{item.imageShowUrl}}" lazy-load />
+              <van-icon class="iconfont {{item.checked ? 'icon-check-square color' : 'icon-border'}}"></van-icon>
+            </view>
+          </block>
+          <block wx:else>
+            <view 
+              class="item"
+              wx:for="{{qrcodes}}"
+              data-type="qrcode"
+              data-image="{{item.imageUrl}}"
+              bind:tap="onChooseImage">
+              <van-image fit="contain" src="{{item.imageShowUrl}}" lazy-load />
+              <view class="default" wx:if="{{item.isDefault === 1}}">默认</view>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+      <view class="footer">
+        <block wx:if="{{qrcodes.length > 0}}">
+          <block wx:if="{{opQrcode}}">
+            <view class="btn btn-delete bgcolor" bind:tap="onClickDeleteQrcode">
+              <van-icon class="iconfont icon-delete"></van-icon>
+              <view>删除</view>
+            </view>
+            <view class="btn btn-quit bdcolor color" bind:tap="onClickQuitEditQrcode">
+              <van-icon class="iconfont icon-poweroff"></van-icon>
+              <view>退出编辑</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="btn btn-add bgcolor" data-type="qrcode" bind:tap="onClickUploadImage">
+              <van-icon class="iconfont icon-cloud-upload"></van-icon>
+              <view>添加二维码</view>
+            </view>
+            <view class="btn btn-edit bdcolor color" bind:tap="onClickEditQrcode">
+              <van-icon class="iconfont icon-edit-square"></van-icon>
+              <view>编辑</view>
+            </view>
+          </block>
+        </block>
+        <view class="btn bgcolor" data-type="qrcode" bind:tap="onClickUploadImage" wx:else>
+          <van-icon class="iconfont icon-cloud-upload"></van-icon>
+          <view>添加二维码</view>
+        </view>
+      </view>
+    </view>
+  </van-popup>
+  <!-- 图库 -->
+  <van-popup show="{{showChangeImageDialog}}" position="right" custom-class="popup-change-image" catchtouchmove="ture" bind:close="onCloseChangeImageDialog">
+    <view class="popup">
+      <van-tabs type="card" bind:change="onChangeImageTab">
+        <van-tab class="upload" title="我的上传">
+          <scroll-view scroll-y scroll-top="{{changeImage.upload.scrollTop}}" bindscrolltolower="loadMoreUploadImages" class="body">
+            <view class="images">
+              <block wx:if="{{changeImage.upload.opImage}}">
+                <view 
+                  class="item"
+                  wx:for="{{changeImage.upload.images}}"
+                  id="{{item.id}}"
+                  bind:tap="onCheckImage">
+                  <van-image fit="contain" src="{{item.imageUrl}}" lazy-load />
+                  <van-icon class="iconfont {{item.checked ? 'icon-check-square color' : 'icon-border'}}"></van-icon>
+                </view>
+              </block>
+              <block wx:else>
+                <view 
+                  class="item"
+                  wx:for="{{changeImage.upload.images}}"
+                  data-image="{{item.path}}"
+                  bind:tap="onChooseImage">
+                  <van-image fit="contain" src="{{item.imageUrl}}" lazy-load />
+                </view>
+              </block>
+            </view>
+          </scroll-view>
+          <view class="footer">
+            <block wx:if="{{changeImage.upload.images.length > 0}}">
+              <block wx:if="{{changeImage.upload.opImage}}">
+                <view class="btn btn-delete bgcolor" bind:tap="onClickDeleteImage">
+                  <van-icon class="iconfont icon-delete"></van-icon>
+                  <view>删除</view>
+                </view>
+                <view class="btn btn-quit bdcolor color" bind:tap="onClickQuitEditImage">
+                  <van-icon class="iconfont icon-poweroff"></van-icon>
+                  <view>退出编辑</view>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="btn btn-add bgcolor" data-type="upload" bind:tap="onClickUploadImage">
+                  <van-icon class="iconfont icon-cloud-upload"></van-icon>
+                  <view>上传图片</view>
+                </view>
+                <view class="btn btn-edit bdcolor color" bind:tap="onClickEditImage">
+                  <van-icon class="iconfont icon-edit-square"></van-icon>
+                  <view>编辑</view>
+                </view>
+              </block>
+            </block>
+            <view class="btn bgcolor" data-type="upload" bind:tap="onClickUploadImage" wx:else>
+              <van-icon class="iconfont icon-cloud-upload"></van-icon>
+              <view>上传图片</view>
+            </view>
+          </view>
+        </van-tab>
+        <van-tab class="store" title="图片库">
+          <view class="header">
+            <van-dropdown-menu>
+              <van-dropdown-item value="{{changeImage.store.filter.categoryId}}" options="{{changeImage.store.categories}}" bind:change="onChangeImageCategory" />
+            </van-dropdown-menu>
+          </view>
+          <scroll-view scroll-y scroll-top="{{changeImage.store.scrollTop}}" bindscrolltolower="loadMoreStoreImages" class="body">
+            <view class="images">
+              <view 
+                class="item"
+                wx:for="{{changeImage.store.images}}"
+                data-image="{{item.path}}"
+                bind:tap="onChooseImage">
+                <van-image fit="contain" src="{{item.imageUrl}}" lazy-load />
+              </view>
+            </view>
+          </scroll-view>
+          <view class="footer"></view>
+        </van-tab>
+      </van-tabs>
+    </view>
+  </van-popup>
+  <!-- 积分不足 -->
+  <van-popup show="{{showPointLessDialog}}" round custom-class="popup-point-less" close-on-click-overlay="{{false}}">
+    <view class="popup">
+      <image src="/assets/images/sorry.png" />
+      <view class="title">积分不足</view>
+      <view class="point"><text class="text">仅剩</text>{{userPoint}}<text class="text">积分</text></view>
+      <van-button type="primary" round bind:click="onClickGotoPoint">我要领积分</van-button>
+    </view>
+  </van-popup>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>
+
+<wxs module="fn">
+  module.exports = {
+    //是否可编辑
+    canEdit: function(setting) {
+      for (var i = 0; i < setting.length; i++) {
+        if (setting[i].value) {
+          return true
+        }
+      }
+
+      return false
+    }
+  }
+</wxs>

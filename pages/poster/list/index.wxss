@@ -1,0 +1,11 @@
+page{background-color:#f3f4f9}
+.header{background-color:#fff;padding:10px 15px}
+.header .nav{display:flex;font-size:13px;color:#969799}
+.header .nav .tag{padding:3px;border-radius:20px;border:1px solid #969799;margin-right:5px;width:60px;text-align:center}
+.header .nav .tag.active{color:#fff}
+.wrapper{background-color:#fff;margin-top:20px;min-height:calc(100vh - 66px)}
+.wrapper .poster{display:flex;flex-direction:row;padding:20rpx;overflow:hidden}
+.wrapper .poster .left{width:345rpx}
+.wrapper .poster .right{width:345rpx;margin-left:20rpx}
+.wrapper .poster .van-image{width:100%;margin:10rpx 0}
+.wrapper .poster .van-image .van-image__img{border-radius:10rpx;box-shadow:0px 2px 4px 0px rgba(0,28,88,0.14)}

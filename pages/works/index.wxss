@@ -1,0 +1,18 @@
+.container{padding:0}
+.header{color:#fff;padding:5px 50px 5px 15px;display:flex;justify-content:space-between;align-items:center}
+.header .left{display:flex;align-items:center}
+.header .left .iconfont{margin-right:10px}
+.header image{width:30px;height:30px}
+.wrapper .van-notice-bar{padding:0 20rpx !important}
+.wrapper .van-notice-bar .iconfont{font-size:20px;margin-right:2px}
+.wrapper .poster{display:flex;flex-direction:row;padding:20rpx;overflow:hidden}
+.wrapper .poster .left{width:345rpx}
+.wrapper .poster .right{width:345rpx;margin-left:20rpx}
+.wrapper .poster .op{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:15px}
+.wrapper .poster .op .share{display:flex;justify-content:space-between;align-items:center;margin:0}
+.wrapper .poster .op button[size="mini"]{font-size:12px}
+.wrapper .poster .op .delete{display:flex;justify-content:space-between;align-items:center;color:#969799}
+.wrapper .poster .op .iconfont{margin-right:3px}
+.wrapper .poster .img{width:100%;border-radius:10rpx;margin:5rpx 0;box-shadow:0px 2px 4px 0px rgba(0,28,88,0.14)}
+.van-empty .van-button{width:150px}
+.container .load-more{padding-top:0}

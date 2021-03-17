@@ -1,0 +1,45 @@
+<import src="/templates/failed.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <view class="container">
+    <view class="body">
+      <view class="images" wx:if="{{qrcodes.length > 0}}">
+        <view 
+          class="item"
+          wx:for="{{qrcodes}}">
+          <van-image fit="contain" src="{{item.imageUrl}}" lazy-load />
+          <view class="op">
+            <view class="default" id="{{item.id}}" bind:tap="onClickSetDefault" wx:if="{{item.isDefault === 0}}">
+              <van-icon class="iconfont icon-pushpin-fill" />
+              <text>设为默认</text>
+            </view>
+            <view class="default" wx:else>
+              <view class="tag bgcolor">默认</view>
+            </view>
+            <view class="delete" id="{{item.id}}" bind:tap="onClickDelete">
+              <van-icon class="iconfont icon-delete" />
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <van-empty description="你还没有添加二维码哦" wx:else />
+    </view>
+    <simple-crop 
+      wx:if="{{imageCrop.visible}}" 
+      size="{{imageCrop.size}}" 
+      src="{{imageCrop.url}}" 
+      cropSizePercent="{{imageCrop.cropSizePercent}}" 
+      borderColor="{{imageCrop.borderColor}}" 
+      bindcropClose="onCloseCropCallback"
+      bindcropCrop="onCropCallback" />
+    <view class="footer bgcolor">
+      <view class="op" bind:tap="onClickUploadImage">
+        <van-icon class="iconfont icon-cloud-upload"></van-icon>
+        <view>添加二维码</view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>

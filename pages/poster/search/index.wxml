@@ -1,0 +1,52 @@
+<import src="/templates/failed.wxml" />
+<import src="/templates/loadMore.wxml" />
+<view class="search">
+  <van-search 
+    value="{{kw}}" 
+    focus="{{loading === 'init'}}" 
+    use-action-slot 
+    use-right-icon-slot
+    placeholder="海量模板任意用" 
+    bind:change="onChangeKw" 
+    bind:search="onSearch">
+    <view slot="action" bind:tap="onSearch">搜索</view>
+    <van-icon slot="right-icon" class="iconfont icon-close-circle-fill" bind:tap="onClearKw" wx:if="{{kw && kw.length > 0}}" />
+  </van-search>
+</view>
+<block wx:if="{{loading === 'success'}}">
+  <block wx:if="{{left.posters.length > 0 || right.posters.length > 0}}">
+    <view class="divider"></view>
+    <view class="container">
+      <view class="poster">
+        <view class='left'>
+          <view wx:for="{{left.posters}}" id="{{item.id}}" bind:tap="onClickPoster">
+            <van-image src="{{item.imageUrl}}" height='{{item.imageHeight}}rpx' lazy-load />
+          </view>
+        </view>
+        <view class='right'>
+          <view wx:for="{{right.posters}}" id="{{item.id}}" bind:tap="onClickPoster">
+            <van-image src="{{item.imageUrl}}" height='{{item.imageHeight}}rpx' lazy-load />
+          </view>
+        </view>
+      </view>
+      <template is="loadMore" data="{{...{pager: pager} }}"/>
+    </view>
+  </block>
+  <van-empty description="抱歉，没有找到相关海报" wx:else />
+</block>
+<view class="container" wx:elif="{{loading === 'init'}}">
+  <view class="history" wx:if="{{historyKws.length > 0}}">
+    <view class="header">
+      <view class="title">历史搜索</view>
+      <van-icon class="iconfont icon-delete" bind:tap="onDeleteKw" />
+    </view>
+    <view class="body">
+      <block wx:for="{{historyKws}}">
+        <van-tag plain data-kw="{{item}}" bind:tap="onClickKw">{{item}}</van-tag>
+      </block>
+    </view>
+  </view>
+</view>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>

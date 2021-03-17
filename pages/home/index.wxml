@@ -1,0 +1,73 @@
+<import src="/templates/failed.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <view class="header">
+    <view class="search" bind:tap="onClickSearch">
+      <van-icon class="iconfont icon-search" />
+      <text>海量模板任意用</text>
+    </view>
+    <view class="ads">
+      <swiper class="swiper" indicator-dots circular autoplay>
+        <view 
+          wx:for="{{ads}}" 
+          data-link-url="{{item.linkUrl}}"
+          bind:tap="onClickComponent">
+          <swiper-item>
+            <image class="img" src="{{item.imageUrl}}" mode="widthFix" />
+          </swiper-item>
+        </view>
+      </swiper>
+    </view>
+    <view class="nav">
+      <view 
+        class="item" 
+        wx:for="{{categories}}" 
+        id="{{item.id}}"
+        bind:tap="onClickCategory">
+        <image class="img" src="{{item.iconUrl}}" mode="aspectFit" />
+        <view class="name">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="wrapper">
+    <view 
+      class="section"
+      wx:for="{{categories}}"
+      wx:for-item="category">
+      <view class="section-header">
+        <view class="title">{{category.name}}</view>
+        <view class="more" id="{{category.id}}" bind:tap="onClickCategory">
+          <view>更多</view>
+          <van-icon class="iconfont icon-right" />
+        </view>
+      </view>
+      <view class="section-category" wx:if="{{category.attribute.records.length > 1}}">
+        <view 
+          class="{{record.current ? 'tag active bgcolor bdcolor' : 'tag'}}"
+          wx:for="{{category.attribute.records}}"
+          wx:for-item="record"
+          id="{{record.id}}"
+          data-category-id="{{category.id}}"
+          bind:tap="onClickAttribute">
+          {{record.value}}
+        </view>
+      </view>
+      <view class="section-list">
+        <view 
+          class="item"
+          wx:for="{{category.posters}}"
+          wx:for-item="poster"
+          id="{{poster.id}}"
+          bind:tap="onClickPoster">
+          <image class="img" mode="widthFix" src="{{poster.imageUrl}}" lazy-load />
+        </view>
+      </view>
+      <view class="section-bottom" id="{{category.id}}" bind:tap="onClickBottomMore">
+        <view>更多{{category.currentName}}</view>
+        <van-icon class="iconfont icon-right" />
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>

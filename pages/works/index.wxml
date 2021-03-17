@@ -1,0 +1,68 @@
+<import src="/templates/failed.wxml" />
+<import src="/templates/loadMore.wxml" />
+<block wx:if="{{loading === 'success'}}">
+  <view class="container">
+    <van-sticky wx:if="{{showAddTips}}">
+      <view class="header bgcolor">
+        <view class="left">
+          <van-icon class="iconfont icon-close" bind:tap="onClickCloseAddTips" />
+          <text>添加到“我的小程序”，下次使用更便捷</text>
+        </view>
+        <image src="/assets/images/follow.gif" />
+      </view>
+    </van-sticky>
+    <view class="wrapper" wx:if="{{whoami.login === 1}}">
+      <block wx:if="{{left.posters.length > 0 || right.posters.length > 0}}">
+        <van-notice-bar text="作品可保留30天，30天前的作品将被清除">
+          <van-icon slot="left-icon" class="iconfont icon-bulb"></van-icon>
+        </van-notice-bar>
+        <view class="poster">
+          <view class='left'>
+            <block wx:for="{{left.posters}}">
+              <view id="{{item.id}}" bind:tap="onClickPoster">
+                <image class='img' style='height:{{item.imageHeight}}rpx' src='{{item.imageShowUrl}}' lazy-load />
+              </view>
+              <view class="op">
+                <button class="share" type="primary" size="mini" id="{{item.id}}" data-image-url="{{item.imageUrl}}" open-type="share">
+                  <van-icon class="iconfont icon-wechat-fill" />
+                  <text>转发</text>
+                </button>
+                <view class="delete" id="{{item.id}}" bind:tap="onClickDeletePoster">
+                  <van-icon class="iconfont icon-delete" />
+                  <text>删除</text>
+                </view>
+              </view>
+            </block>
+          </view>
+          <view class='right'>
+            <block wx:for="{{right.posters}}">
+              <view id="{{item.id}}" bind:tap="onClickPoster">
+                <image class='img' style='height:{{item.imageHeight}}rpx' src='{{item.imageShowUrl}}' lazy-load />
+              </view>
+              <view class="op">
+                <button class="share" type="primary" size="mini" id="{{item.id}}" data-image-url="{{item.imageUrl}}" open-type="share">
+                  <van-icon class="iconfont icon-wechat-fill" />
+                  <text>转发</text>
+                </button>
+                <view class="delete" id="{{item.id}}" bind:tap="onClickDeletePoster">
+                  <van-icon class="iconfont icon-delete" />
+                  <text>删除</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+        <template is="loadMore" data="{{...{pager: pager} }}"/>
+      </block>
+      <van-empty description="你还没有作品哦，快去设计一个吧~" wx:else>
+        <van-button round type="primary" bind:click="onClickGotoHome">去创建</van-button>
+      </van-empty>
+    </view>
+    <van-empty description="登录后才可以看到你的作品哦~" wx:else>
+      <van-button round type="primary" bind:click="onClickLogin">立即登录</van-button>
+    </van-empty>
+  </view>
+</block>
+<block wx:else>
+  <template is="failed" data="{{...{loading: loading, loadingRetry: loadingRetry} }}"/>
+</block>
